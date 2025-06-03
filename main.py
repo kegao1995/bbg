@@ -6,15 +6,14 @@ def show_quote(ticker: str) -> None:
     t = yf.Ticker(ticker)
     try:
         info = t.fast_info
+
         last_price = info.get("lastPrice")
         open_price = info.get("open")
         high = info.get("dayHigh")
         low = info.get("dayLow")
         volume = info.get("lastVolume")
-    except Exception as e:
-        print(f"Error retrieving data for {ticker}: {e}")
-        return
     print(f"\n{ticker.upper()} Quote")
+
     print("Last Price:", last_price)
     print("Open:", open_price)
     print("High:", high)
@@ -36,7 +35,6 @@ def show_chart(ticker: str) -> None:
     plt.date_form("Y-m-d")
     plt.title(f"{ticker.upper()} 1 Month Close")
     plt.plot(hist.index.strftime("%Y-%m-%d").to_list(), hist["Close"].to_list())
-    plt.show()
 
 
 def main() -> None:
